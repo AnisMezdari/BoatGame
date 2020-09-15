@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using BoatGame;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,9 +11,12 @@ public class Boat : MonoBehaviour
     public int gravity = 5;
     public int cloudForce = 500;
 
-    private bool isFalling = true;
+    public GameObject game;
 
- 
+    
+    private bool isFalling = true;
+    public bool flyUp = false;
+    public bool flyDown = false;
 
 
     // Start is called before the first frame update
@@ -26,19 +30,17 @@ public class Boat : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        flyUp = false;
 
+        /*     Mobile version  (touch)  
+         
+        if(Input.touchCount > 0 && Input.touches[0].phase == TouchPhase.Began)
+            {
+                GetComponent<Rigidbody>().AddForce(Vector3.up * verticaleForce, ForceMode.Impulse);
+            }*/
 
-        /*        if(Input.touchCount > 0 && Input.touches[0].phase == TouchPhase.Began)
-                {
-                    GetComponent<Rigidbody>().AddForce(Vector3.up * verticaleForce, ForceMode.Impulse);
-                }*/
-
-
-       // this.transform.position += new Vector3(horizontaleSpeed * Time.deltaTime, 0, 0);
 
         GetComponent<Rigidbody2D>().AddForce(-Vector3.up * gravity);
-        
-        //Debug.Log(GetComponent<Rigidbody>().velocity);
 
 #if UNITY_EDITOR
         if (Input.GetMouseButtonDown(0) && isFalling)
@@ -50,11 +52,24 @@ public class Boat : MonoBehaviour
 
         if (GetComponent<Rigidbody2D>().velocity.y < -10    )
         {
-            //isFalling = true;
             this.horizontaleSpeed = 5;
         }
 
 
+        if(this.transform.position.y > 5)
+        {
+            this.transform.position += new Vector3(0, -10);
+            flyUp = true;
+        }
+        if( this.transform.position.y < -5)
+        {
+            this.transform.position += new Vector3(0, 10);
+            flyDown = true;
+        }
+
+
+        Debug.Log(flyUp);
+        Debug.Log(flyDown);
     }
 
 
@@ -62,11 +77,11 @@ public class Boat : MonoBehaviour
     {   
         if(other.tag.Equals("Cloud"))
         {
-            Debug.Log("sa passe");
+            Game gameScript = game.GetComponent<BoatGame.Game>();
+
             GetComponent<Rigidbody2D>().velocity = Vector3.zero;
             GetComponent<Rigidbody2D>().AddForce(Vector3.up * cloudForce, ForceMode2D.Impulse);
-            this.horizontaleSpeed = this.horizontaleSpeed * 2;
-
+            this.horizontaleSpeed *=  2;
 
         }
     }

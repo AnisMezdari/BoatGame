@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6011414313090542378}
   - component: {fileID: 927824092}
   - component: {fileID: 7904051369522737555}
+  - component: {fileID: -8844752669531876745}
   m_Layer: 0
   m_Name: cloud
   m_TagString: Cloud
@@ -123,3 +124,24 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 23.632826, y: 17.69}
   m_EdgeRadius: 0
+--- !u!50 &-8844752669531876745
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3607952070201286423}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
