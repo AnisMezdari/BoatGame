@@ -17,32 +17,45 @@ public class FlyObject : MonoBehaviour
     void Start()
     {
         Boat = GameObject.Find("Boat");
-        y_oldPosition = this.transform.position.y;
-        Debug.Log(" hola les amis");
+        //y_oldPosition = this.transform.position.y;
     }
 
     // Update is called once per frame
     void Update()
     {
         speed = GameObject.Find("Boat").GetComponent<Boat>().horizontaleSpeed;
-        // this.transform.Translate(new Vector3(-(speed  / scaling )* Time.deltaTime, Y_position));
+        
+/*        if (this.tag.Equals("Debris"))
+        {
+            this.transform.position += new Vector3(-(speed / scaling) * Time.deltaTime, Y_position,3);
+        }
+        else
+        {*/
+           // this.transform.position += new Vector3();
+        this.transform.Translate(new Vector3(-(speed / scaling) * Time.deltaTime, Y_position));
+        //}
 
-        Debug.Log(Y_position);
-        this.transform.position += new Vector3(-(speed / scaling) * Time.deltaTime, Y_position);
+        // if the boat exceed the screen (Up)
         if (Boat.GetComponent<Boat>().flyUp)
         {
-            Debug.Log("sa passe");
-            transform.position =  Vector3.Lerp(this.transform.position, new Vector3(this.transform.position.x, this.transform.position.y-10),Time.time);
-            //GetComponent<Rigidbody2D>().AddForce(Vector3.down * 50 , ForceMode2D.Impulse);
- 
 
-            //Y_position = -1;
-          
+            transform.position =  Vector3.Lerp(this.transform.position, new Vector3(this.transform.position.x, this.transform.position.y-10, this.transform.position.z),Time.time);
         }
+        // if the boat exceed the screen (Down)
         if (Boat.GetComponent<Boat>().flyDown)  
         {
-            //this.transform.position += new Vector3(0, 10);
-            Boat.GetComponent<Boat>().flyDown = false;
+            transform.position = Vector3.Lerp(this.transform.position, new Vector3(this.transform.position.x, this.transform.position.y + 10, this.transform.position.z), Time.time);
+        }
+        Destroy();
+    }
+
+    public void Destroy()
+    {
+        if(this.transform.position.x < -17)
+        {
+            Destroy(this.gameObject);
         }
     }
+
+ 
 }

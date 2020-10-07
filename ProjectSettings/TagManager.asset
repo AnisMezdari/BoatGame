@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Projectile
   - Cloud
+  - Debris
+  - Asteroid
+  - Star
   layers:
   - Default
   - TransparentFX
